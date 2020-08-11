@@ -72,19 +72,18 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
-
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->middleware([
+    App\Http\Middleware\CorsMiddleware::class
+]);
 
 $app->routeMiddleware([
-    'auth'     => App\Http\Middleware\Authenticate::class,
-    'throttle' => Nomadnt\LumenPassport\Middleware\ThrottleRequests::class,
-    'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class, // cloned from Spatie\Permission\Middleware
-    'role'       => \Spatie\Permission\Middlewares\RoleMiddleware::class,  // cloned from Spatie\Permission\Middleware
+    'auth'              => App\Http\Middleware\Authenticate::class,
+    'throttle'          => Nomadnt\LumenPassport\Middleware\ThrottleRequests::class,
+    'permission'        => \Spatie\Permission\Middlewares\PermissionMiddleware::class, // cloned from Spatie\Permission\Middleware
+    'role'              => \Spatie\Permission\Middlewares\RoleMiddleware::class,  // cloned from Spatie\Permission\Middleware
+    'db_transaction'    => App\Http\Middleware\DBTransactionMiddleware::class,
+    // 'verified'          => App\Http\Middleware\VerifyMailMiddleware::class,
+    'auth.basic'        => App\Http\Middleware\BasicAuthMiddleware::class,
 ]);
 
 /*
